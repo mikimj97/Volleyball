@@ -1,4 +1,4 @@
-from python.logging import log_params
+from code.logging import log_params
 
 
 def parse_args(cmd_args):
