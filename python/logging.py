@@ -4,4 +4,4 @@ import json
 
 
 def log_params():
-    pass
+    print("Logging params")
