@@ -20,5 +20,6 @@ if __name__ == "__main__":
     elif args.gather_results:
         print("Gather results")
     else:
-        print("None of the main options selected, print usage")
+        print("You must select one of these three options: '--run', '--prep', or  '--gather_results'.")
+
 

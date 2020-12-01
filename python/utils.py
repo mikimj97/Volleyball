@@ -5,24 +5,24 @@ from python.logging import log_params
 
 
 def write_file(file, location):
-    pass
+    print("Writing to file...")
 
 
 def read_file(location):
-    pass
+    print("Reading from file...")
 
 
 def parse_args(cmd_args):
     print("Parsing...")
 
-    parser = argparse.ArgumentParser
+    parser = argparse.ArgumentParser()
 
     parser.add_argument("--verbose", help="verbose output", action="store_true", default=False)
     parser.add_argument("--input_dir", help="directory containing the input data files", type=str,
                         default=os.path.join("data", "raw"))
     parser.add_argument("--output_dir", help="directory to put the output in", type=str,
                         default=os.path.join("data", "preprocessed"))
-    parser.add_argument("--preprocess", help="preprocess the data", action="store_true", default=False)
+    parser.add_argument("--prep", help="preprocess the data", action="store_true", default=False)
     parser.add_argument("--run", help="create models from preprocessed data", action="store_true", default=False)
     parser.add_argument("--pattern", help="the pattern to use to choose the files", type=str, default="*imu.csv")
     parser.add_argument("--window_size", help="number of rows to look at at once", type=int, default=100)
