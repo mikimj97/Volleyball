@@ -1,0 +1,7 @@
+1: BASIC
+2: Q3L/R
+3: X3L/R
+4: X2L/R
+5: ATTACK
+6: noise (empty info files!)
+7: dive (empty info files!)

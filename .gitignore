@@ -1,1 +1,13 @@
 *.swp
+
+data/preprocessed/*
+data/labeled/*
+
+venv/*
+
+Pipfile
+Pipfile.lock
+
+python/__pycache__
+
+.idea/*
