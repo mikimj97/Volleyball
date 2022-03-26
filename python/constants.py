@@ -25,6 +25,17 @@ JUMP_TYPES = {
     }
 }
 
+JUMP_INDEX_TO_TYPE = {
+    1: "BASIC",
+    2: "Q3L",
+    3: "Q3R",
+    4: "X3L",
+    5: "X3R",
+    6: "X2L",
+    7: "X2R",
+    8: "ATTACK"
+}
+
 INITIALS = {
     "EA": 0,
     "GJ": 1,

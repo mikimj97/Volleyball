@@ -29,8 +29,6 @@ def label_df(file, info, full):
     df.reset_index(inplace=True, drop=True)
     df["jump"] = 0
 
-    # TODO: What do we do about directions and different sensor locations?
-
     info_df = pd.read_csv(info)
 
     jumps = info_df.iloc[:, 0]

@@ -4,6 +4,7 @@ import pickle
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import pywt
 
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -39,12 +40,12 @@ def run(args):
 
     for i in range(11):
 
-        # clf = RandomForestClassifier()
+        clf = RandomForestClassifier()
         # clf = AdaBoostClassifier()
         # clf = DecisionTreeClassifier()
-        # clf = KNeighborsClassifier()
-        clf = MLPClassifier(max_iter=1000000)
-        # clf = LogisticRegression()
+        # clf = KNeighborsClassifier(n_neighbors=1000)
+        # clf = MLPClassifier(max_iter=1000000)
+        # clf = LogisticRegression(max_iter=10000)
 
         # Do the stuff
 

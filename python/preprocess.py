@@ -3,12 +3,14 @@ import random
 import pandas as pd
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 
-from python.constants import JUMP_TYPES, INITIALS
+from python.constants import JUMP_TYPES, INITIALS, JUMP_INDEX_TO_TYPE
 from python.orion import augment_with_window_size
 from itertools import combinations
 from python.get_data import get_data
 from python.utils import write_file, read_file
+import pywt
 
 
 def chunks(lst, n):
@@ -16,6 +18,24 @@ def chunks(lst, n):
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
 
+
+def plot_cwt_coeffs_per_label(X, label_names, signals, scales, wavelet, output_dir, file_name):
+    fig, axs = plt.subplots(nrows=3, ncols=3, sharex=True, sharey=True, figsize=(12, 10))
+
+    for ax, name, signal in zip(axs.flat, label_names, signals):
+        # apply  PyWavelets continuous wavelet transfromation function
+        coeffs, freqs = pywt.cwt(X[:, signal], scales, wavelet=wavelet)
+        # create scalogram
+        ax.imshow(coeffs, cmap='coolwarm', aspect='auto')
+        ax.set_title(name)
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.set_ylabel('Scale')
+        ax.set_xlabel('Time')
+    plt.tight_layout()
+    # plt.show()
+    plt.savefig(os.path.join(output_dir, file_name))
+    plt.close(fig)
 
 def preprocess(args):
     print("Preprocessing...")
@@ -31,10 +51,16 @@ def preprocess(args):
         #     continue
 
         initials = data[-12:-10]
+        # TODO: take this out if not doing wavelet stuff!
+        # if initials != "EA":
+        #     continue
+        # if int(data[-9]) > 5:
+        #     continue
 
         df = read_file(data)
+
         if args.main_axes:
-            df = df.drop(df.columns[37:42], axis=1)
+            df = df.drop(df.columns[37:-1], axis=1)
             df = df.drop(df.columns[23:28], axis=1)
             df = df.drop(df.columns[9:14], axis=1)
             cols = 9
@@ -57,6 +83,55 @@ def preprocess(args):
             df = df.drop(df.columns[:cols], axis=1)  # R+L
         else:
             pass  # All
+
+
+        """
+            The wavelet transform experimental stuff starts here:
+        """
+        # jumps = df.jump.to_numpy()
+        # jump_type = jumps[np.nonzero(jumps)[0][0]]
+        # second_jump_type = jumps[::-1][np.nonzero(jumps[::-1])[0][0]]
+        # start = jumps.tolist().index(jump_type)
+        # jumps = jumps[start:]
+        # end = jumps.tolist().index(0)
+        #
+        # X_train = df.iloc[start:start + end, :].to_numpy()
+        # labels = df.columns.to_numpy()
+        # signals = np.arange(9)
+        # scales = np.arange(1, 65)
+        # wavelet = 'gaus5'
+        # name = initials + "_" + JUMP_INDEX_TO_TYPE[jump_type] + "_" + "W" + "_" + str(len(scales)) + "_" + wavelet + ".png"
+        #
+        # plot_cwt_coeffs_per_label(X_train, labels, signals, scales, wavelet, args.output_dir, name)
+        #
+        # scales = np.arange(1, 129)
+        # name = initials + "_" + JUMP_INDEX_TO_TYPE[jump_type] + "_" + "W" + "_" + str(len(scales)) + "_" + wavelet + ".png"
+        #
+        # plot_cwt_coeffs_per_label(X_train, labels, signals, scales, wavelet, args.output_dir, name)
+        #
+        # if second_jump_type != jump_type:
+        #     start = jumps.tolist().index(second_jump_type)
+        #     jumps = jumps[start:]
+        #     end = jumps.tolist().index(0)
+        #
+        #     X_train = df.iloc[start:start + end, :].to_numpy()
+        #     scales = np.arange(1, 65)
+        #     name = initials + "_" + JUMP_INDEX_TO_TYPE[second_jump_type] + "_" + "W" + "_" + str(len(scales)) + "_" + wavelet + ".png"
+        #
+        #     plot_cwt_coeffs_per_label(X_train, labels, signals, scales, wavelet, args.output_dir, name)
+        #
+        #     scales = np.arange(1, 129)
+        #     name = initials + "_" + JUMP_INDEX_TO_TYPE[second_jump_type] + "_" + "W" + "_" + str(len(scales)) + "_" + wavelet + ".png"
+        #
+        #     plot_cwt_coeffs_per_label(X_train, labels, signals, scales, wavelet, args.output_dir, name)
+
+
+
+
+        """
+            Pywt ends here
+        """
+        # continue
 
         target = df.jump
         df.drop(columns=["jump"], axis=1, inplace=True)
