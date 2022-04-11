@@ -1,7 +1,6 @@
 *.swp
 
 data/preprocessed/*
-data/labeled/*
 
 venv/*
 

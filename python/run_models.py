@@ -78,6 +78,7 @@ def run(args):
         plt.xlabel('Predicted Label')
         # plt.savefig(os.path.join(args.output_dir,
         #                          "confusion_matrix-{}-{}.png".format(args.window_size, args.sampling_interval)))
+        # plt.show()
         plt.close('all')
         # with open(os.path.join(args.output_dir,
         #                        "confusion_matrix-{}-{}.txt".format(args.window_size, args.sampling_interval)), 'w') as f:
@@ -108,3 +109,5 @@ def run(args):
 
     avg_f1 = np.average(f1s)
     print("Average: {}".format(avg_f1))
+
+    write_file(avg_f1, os.path.join(args.output_dir, "results_{}_{}.txt".format(args.window_size, args.sampling_interval)))
