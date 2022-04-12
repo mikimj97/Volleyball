@@ -10,7 +10,6 @@ from python.orion import augment_with_window_size
 from itertools import combinations
 from python.get_data import get_data
 from python.utils import write_file, read_file
-import pywt
 
 
 def chunks(lst, n):
@@ -148,6 +147,10 @@ def preprocess(args):
         dfs.append(augmented)
 
     final_df = pd.concat(dfs)
+
+    if not os.path.exists(args.output_dir):
+        os.mkdir(args.output_dir)
+
     final_df.to_csv(os.path.join(args.output_dir, "Preprocessed_{}_{}.csv".format(
         args.window_size, args.sampling_interval)), index=False, header=True)
 
