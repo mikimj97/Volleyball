@@ -66,6 +66,9 @@ recurring_prep_args.append("--window_size")
 sampling_interval = sampling_intervals[array_id]
 
 for window_size in window_sizes:
+
+    if int(window_size) < int(sampling_interval):
+        continue
 # for wavelet_scale in wavelet_scales:
     # for post_offset in offsets:
     #     pre_offset = str(1 - float(post_offset))
