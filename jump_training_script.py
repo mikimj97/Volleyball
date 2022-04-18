@@ -52,11 +52,10 @@ for input_dir in dirs:
     for sampling_interval in sampling_intervals:
 
         run_args.extend(recurring_run_args)
-        run_args.insert(-3, window_size)
         run_args.insert(-2, sampling_interval)
         run_args.insert(-1, input_dir)
 
-        output_dir = os.path.join("results", input_dir)
+        output_dir = os.path.join("results", input_dir.split(os.path.sep)[-1])
         run_args.append(output_dir)
         run_args_list.append(copy.copy(run_args))
         run_args.clear()
