@@ -58,7 +58,6 @@ for input_dir in dirs:
         run_args.insert(-1, input_dir)
 
         output_dir = os.path.join("results", input_dir.split(os.path.sep)[-1])
-
         run_args.append(output_dir)
 
         if not os.path.exists(os.path.join(output_dir, "results_{}_{}.txt".format(window_size, sampling_interval))):
