@@ -26,11 +26,21 @@ def gather_ml_results(args):
     # see https://stackoverflow.com/questions/16953842/using-os-walk-to-recursively-traverse-directories-in-python
     for root, dirs, files in os.walk(results_dir):
         path = root.split(os.sep)
+        # print(path[-1][:4])
+
+        if "old_results" in root or "testing" in root or "no_" in root:
+            continue
+
+        if not (path[-1][:4] == "full" or path[-1][:4] == "jump"):
+            continue
+
         # print ((len(path) - 1) * '---', os.path.basename(root))
         outputfile.write(root + "\n")
+
         for file in files:
             # print(len(path) * '---', file)
             # we have a file.  is it a results file?
+            # print(os.path.join(root, file))
 
             if (is_a_results_file(file)) and not (file == outputfilename):
                 # it is.  Process it.
