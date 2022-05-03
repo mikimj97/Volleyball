@@ -50,6 +50,8 @@ recurring_run_args.append("--output_dir")
 
 for input_dir in dirs:
     for sampling_interval in sampling_intervals:
+        if int(window_size) < int(sampling_interval):
+            continue
 
         run_args.extend(recurring_run_args)
         run_args.insert(-2, sampling_interval)

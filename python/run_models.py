@@ -109,4 +109,7 @@ def run(args):
     avg_f1 = np.average(f1s)
     print("Average: {}".format(avg_f1))
 
-    write_file(avg_f1, os.path.join(args.output_dir, "results_{}_{}.txt".format(args.window_size, args.sampling_interval)))
+    if not os.path.exists(args.output_dir):
+        os.mkdir(args.output_dir)
+
+    write_file(str(avg_f1), os.path.join(args.output_dir, "results_{}_{}.txt".format(args.window_size, args.sampling_interval)))

@@ -1,0 +1,16 @@
+--pattern
+*imu.csv
+--run
+--window_size
+400
+--jumps_only
+--full
+--main_axes
+--left
+--waist
+--output_dir
+results\full_waist_left_main
+--input_dir
+data\preprocessed\full_waist_left_main
+--sampling_interval
+390

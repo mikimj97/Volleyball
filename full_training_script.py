@@ -50,6 +50,8 @@ recurring_run_args.append("--output_dir")
 
 for input_dir in dirs:
     for sampling_interval in sampling_intervals:
+        if int(window_size) < int(sampling_interval):
+            continue
 
         run_args.extend(recurring_run_args)
         run_args.insert(-2, sampling_interval)
@@ -57,7 +59,13 @@ for input_dir in dirs:
 
         output_dir = os.path.join("results", input_dir.split(os.path.sep)[-1])
         run_args.append(output_dir)
-        run_args_list.append(copy.copy(run_args))
+
+        if not os.path.exists(os.path.join(output_dir, "results_{}_{}.txt".format(window_size, sampling_interval))):
+            run_args_list.append(copy.copy(run_args))
+        else:
+            print("results_{}_{} already exists, skipping".format(window_size, sampling_interval))
+
+
         run_args.clear()
 
 # print(run_args_list)
