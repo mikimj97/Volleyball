@@ -3908,22 +3908,6 @@ results/full_waist_left_main
 0.8800561834165911, 400, 15
 0.8702533265270858, 440, 10
 0.8094143605839367, 380, 330
---pattern
-*imu.csv
---run
---window_size
-400
---jumps_only
---full
---main_axes
---left
---waist
---output_dir
-results\full_waist_left_main
---input_dir
-data\preprocessed\full_waist_left_main
---sampling_interval
-390, 
 0.8825184152832567, 300, 30
 0.8772795549469915, 280, 20
 0.8111210870723112, 440, 370
@@ -3984,22 +3968,6 @@ data\preprocessed\full_waist_left_main
 0.8107926656550067, 380, 190
 0.8514455074399175, 300, 110
 0.8360526531118784, 240, 75
---pattern
-*imu.csv
---window_size
-400
---prep
---jumps_only
---full
---main_axes
---waist
---left
---input_dir
-data\labeled\full
---output_dir
-data\preprocessed\full_waist_left_main\
---sampling_interval
-390, ss, args
 0.809430171462413, 340, 310
 0.8336845940804468, 200, 40
 0.8557306210713033, 400, 130
