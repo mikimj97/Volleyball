@@ -35,7 +35,7 @@ def gather_ml_results(args):
             continue
 
         # print ((len(path) - 1) * '---', os.path.basename(root))
-        outputfile.write(root + "\n")
+#        outputfile.write(root + "\n")
 
         for file in files:
             # print(len(path) * '---', file)
