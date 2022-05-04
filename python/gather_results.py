@@ -79,5 +79,5 @@ def process_results(path_pieces, resultsfile_name, outputfile):
     filecontents = (thefile.read())
     cleancontents = filecontents.replace('"', "")
     thefile.close()
-    outputfile.write(cleancontents + ", " + resultsfile_name[8:-4].replace("_", ", ") + "\n")
+    outputfile.write(cleancontents + ", " + resultsfile_name[8:-4].replace("_", ", ") + ", " + path_pieces[1][:4] + ", " + path_pieces[1][5:-5] + "\n")
     return
