@@ -8,7 +8,7 @@
 # SBATCH --mail-user=mikimj97@gmail.com   # email address
 # SBATCH --mail-type=END
 # SBATCH --mail-type=FAIL
-# SBATCH --array=0-14  # how many tasks in the array
+# SBATCH --array=0-12  # how many tasks in the array
 # SBATCH -c 1   # one CPU core per task
 
 

@@ -51,5 +51,6 @@ def parse_args(cmd_args):
     parser.add_argument("--main_axes", help="only use the three main axes (acc, gyro, mag)", action="store_true",
                         default=False)
     parser.add_argument("--full", help="label full movement", action="store_true", default=False)
+    parser.add_argument("--get_feature_imp", help="get classifier feature importances", action="store_true", default=False)
 
     return parser.parse_args(cmd_args)

@@ -68,6 +68,15 @@ def run(args):
         f1 = f1_score(y_test, pred, average="macro")
         print("F: {}".format(f1))
 
+        # if args.get_feature_imp:
+        #     # get the feature importance array and print it out.
+        #     features = clf.feature_importances_
+        #     features_as_csv = pd.DataFrame(features).transpose()
+        #     features_as_csv_string = features_as_csv.to_csv(header=False)
+        #     print("aaaaaaaa, " + str(f1) + ", " + features_as_csv_string)
+        #     pass
+
+
         confusion = confusion_matrix(y_test, pred, labels=list(range(len(jump_types))))
         fig = plt.figure()
         plt.matshow(confusion)
@@ -80,7 +89,7 @@ def run(args):
         # plt.show()
         plt.close('all')
         # with open(os.path.join(args.output_dir,
-        #                        "confusion_matrix-{}-{}.txt".format(args.window_size, args.sampling_interval)), 'w') as f:
+        #                        "confusion_matrix_{}_{}_{}.txt".format(args.window_size, args.sampling_interval, i)), 'w') as f:
         #     f.write(np.array2string(confusion, separator=', '))
 
         # params = {"Accuracy: ": accuracy, "F1-score: ": f1, "Window size: ": 400, "Overlap: ": 50}
@@ -94,15 +103,17 @@ def run(args):
         #                        "volleyball-waist-{}-{}.pkl".format(args.window_size, args.sampling_interval)), 'wb') as f:
         #     pickle.dump(clf, f)
 
-        # imp = clf.feature_importances_
-        #
-        # imp_dict = {}
-        #
-        # for key, val in zip(train.columns, imp):
-        #     imp_dict[key] = val
+        if args.get_feature_imp:
+            imp = clf.feature_importances_
 
-        # for i in sorted(imp_dict, key=imp_dict.get, reverse=True):
-        #     print(i, imp_dict[i])
+            imp_dict = {}
+
+            for key, val in zip(train.columns, imp):
+                imp_dict[key] = val
+
+            # with open(os.path.join(args.output_dir,"imp_dict_{}_{}_{}.txt".format(args.window_size, args.sampling_interval, i)), 'w') as f:
+            #     for j in sorted(imp_dict, key=imp_dict.get, reverse=True):
+            #         f.write("{}, {}\n".format(j, imp_dict[j]))
 
         f1s.append(f1)
 
@@ -112,4 +123,4 @@ def run(args):
     if not os.path.exists(args.output_dir):
         os.mkdir(args.output_dir)
 
-    write_file(str(avg_f1), os.path.join(args.output_dir, "results_{}_{}.txt".format(args.window_size, args.sampling_interval)))
+    # write_file(str(avg_f1), os.path.join(args.output_dir, "results_{}_{}.txt".format(args.window_size, args.sampling_interval)))
